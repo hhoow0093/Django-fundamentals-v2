@@ -10,6 +10,9 @@ still need to be learned and configured for the particular application.
 
 ## What is in this project
 
+For a step-by-step explanation of the environment, tool configuration, CI,
+and troubleshooting, see the [development setup walkthrough](./docs/development-setup.md).
+
 - `mysite/` contains the Django project configuration: settings, URL routing,
   and ASGI/WSGI entry points.
 - `mysite/polls/` is the tutorial application. An app is a Django component
@@ -109,6 +112,11 @@ environment, runs pre-commit, and runs Django's system check and test command.
 The workflow currently triggers on pushes to branches other than `main`; its
 pull-request-specific hook step will only run if a pull-request trigger is
 configured.
+
+The test workflow uses `mysite.settings` and copies
+`mysite/local_settings.ci.py` to `mysite/local_settings.py` as an override.
+`local_settings.ci` is not a valid settings module path in this layout because
+`local_settings.py` is a module, not a package containing a `ci` submodule.
 
 The test command is in place, but `mysite/polls/tests.py` is currently a
 placeholder, so Django reports that it found zero tests. A successful command
