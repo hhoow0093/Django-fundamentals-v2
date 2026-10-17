@@ -26,7 +26,8 @@ jobs:
           --health-retries 5
 
     env:
-      DJANGO_SETTINGS_MODULE: mysite.local_settings.ci
+      DJANGO_SETTINGS_MODULE: mysite.settings
+      DJANGO_SECRET_KEY: github-actions-test-key-not-a-secret
       DB_PASSWORD: postgres
 
     steps:

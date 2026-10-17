@@ -113,6 +113,11 @@ The workflow currently triggers on pushes to branches other than `main`; its
 pull-request-specific hook step will only run if a pull-request trigger is
 configured.
 
+The test workflow uses `mysite.settings` and copies
+`mysite/local_settings.ci.py` to `mysite/local_settings.py` as an override.
+`local_settings.ci` is not a valid settings module path in this layout because
+`local_settings.py` is a module, not a package containing a `ci` submodule.
+
 The test command is in place, but `mysite/polls/tests.py` is currently a
 placeholder, so Django reports that it found zero tests. A successful command
 with zero tests means the test runner works; it does not yet demonstrate

@@ -245,9 +245,17 @@ uv run --locked python manage.py check
 uv run --locked python manage.py test
 ```
 
-The lockfile makes the CI development environment consistent with local
-development. `manage.py check` runs Django's system checks. `manage.py test`
-uses Django's test runner, but at present the `mysite/polls/tests.py` file is only a
+The test workflow starts a PostgreSQL service and copies
+`mysite/local_settings.ci.py` to `mysite/local_settings.py`. Django still loads
+`mysite.settings`; that module imports the copied file as an optional override.
+Do not set `DJANGO_SETTINGS_MODULE` to `mysite.local_settings.ci`: that path
+would mean Python should find a `local_settings` package containing a `ci`
+submodule, but this project uses a single `local_settings.py` module instead.
+The workflow also supplies the required `DJANGO_SECRET_KEY` and database
+password through its job environment.
+
+`manage.py check` runs Django's system checks. `manage.py test` uses Django's
+test runner, but at present the `mysite/polls/tests.py` file is only a
 placeholder, so the runner finds zero tests. A passing zero-test run confirms
 the command works; it does not validate application behavior.
 
