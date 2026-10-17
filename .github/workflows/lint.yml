@@ -45,6 +45,9 @@ jobs:
         if: github.event_name == 'push'
         run: uv run --locked pre-commit run --all-files --show-diff-on-failure --color always
 
+      - name: Copy CI settings file
+        run: cp mysite/local_settings.ci.py mysite/local_settings.py
+
       - name: Run Django checks and tests
         run: |
           uv run --locked python manage.py check
