@@ -10,6 +10,9 @@ still need to be learned and configured for the particular application.
 
 ## What is in this project
 
+For a step-by-step explanation of the environment, tool configuration, CI,
+and troubleshooting, see the [development setup walkthrough](./docs/development-setup.md).
+
 - `mysite/` contains the Django project configuration: settings, URL routing,
   and ASGI/WSGI entry points.
 - `mysite/polls/` is the tutorial application. An app is a Django component
