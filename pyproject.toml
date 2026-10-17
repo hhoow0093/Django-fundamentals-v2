@@ -1,0 +1,54 @@
+[project]
+name = "02-fundamental-of-django"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "django>=6.1.2",
+    "psycopg[binary]>=3.3.6",
+]
+
+[dependency-groups]
+dev = [
+    "bandit[toml]>=1.9.4",
+    "django-stubs[compatible-mypy]>=6.1.2",
+    "mypy>=2.4.0",
+    "pre-commit>=4.7.0",
+    "ruff>=0.17.1",
+]
+
+# Development
+
+[tool.ruff]
+line-length = 100
+target-version = "py314"
+src = ["mysite"]
+
+[tool.ruff.lint]
+select = [
+  "E", "F", "W",   # pycodestyle + pyflakes
+  "I",             # isort
+  "B",             # bugbear
+  "UP",            # pyupgrade
+  "SIM",           # simplify
+]
+ignore = []
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S"]
+
+[tool.mypy]
+python_version = "3.14"
+strict = true
+warn_unused_ignores = true
+show_error_codes = true
+files = ["mysite"]
+plugins = ["mypy_django_plugin.main"]
+
+[tool.django-stubs]
+django_settings_module = "mysite.settings"
+
+[tool.bandit]
+exclude_dirs = ["tests", ".venv"]
+skips = []          # e.g. ["B101"] if you use assert in src
