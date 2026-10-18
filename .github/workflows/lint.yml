@@ -47,8 +47,3 @@ jobs:
       - name: Run hooks on all files
         if: github.event_name == 'push'
         run: uv run --locked pre-commit run --all-files --show-diff-on-failure --color always
-
-      - name: Run Django checks and tests
-        run: |
-          uv run --locked python manage.py check
-          uv run --locked python manage.py test

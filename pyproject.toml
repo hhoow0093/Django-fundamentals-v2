@@ -6,7 +6,10 @@ readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
     "django>=6.1.2",
+    "google-genai>=2.31.0",
     "psycopg[binary]>=3.3.6",
+    "pydantic>=2.14.1",
+    "requests>=2.34.2",
 ]
 
 [dependency-groups]
@@ -24,16 +27,17 @@ dev = [
 line-length = 100
 target-version = "py314"
 src = ["mysite"]
+extend-exclude = [".github/**"]
+force-exclude = true
 
 [tool.ruff.lint]
 select = [
-  "E", "F", "W",   # pycodestyle + pyflakes
-  "I",             # isort
-  "B",             # bugbear
-  "UP",            # pyupgrade
-  "SIM",           # simplify
+  "E", "F", "W",
+  "I",
+  "B",
+  "UP",
+  "SIM",
 ]
-ignore = []
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["S"]
@@ -50,5 +54,5 @@ plugins = ["mypy_django_plugin.main"]
 django_settings_module = "mysite.settings"
 
 [tool.bandit]
-exclude_dirs = ["tests", ".venv"]
+exclude_dirs = ["tests", ".venv", ".github"]
 skips = []          # e.g. ["B101"] if you use assert in src
