@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # 3rd party library
+    "django_extensions",
+    # Custom app
+    "mysite.polls",
 ]
 
 MIDDLEWARE = [
@@ -125,6 +129,8 @@ MAILERS = {
         "BACKEND": "django.core.mail.backends.console.EmailBackend",
     },
 }
+
+TIME_ZONE = "Asia/Jakarta"
 
 # local settings
 try:  # noqa: SIM105
