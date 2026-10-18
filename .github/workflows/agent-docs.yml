@@ -2,7 +2,7 @@ name: AI PR Docs
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened, ready_for_review]
+    types: [opened]
 
 concurrency:
   group: pr-docs-${{ github.event.pull_request.number }}
