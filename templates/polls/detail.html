@@ -1,0 +1,14 @@
+<h1>You are viewing question {{ question.id }}</h1>
+
+<ul>
+    <li>{{ question }}</li>
+    <li>{{ question.published_date }}</li>
+</ul>
+
+<h2>Available Choices for {{ question.id }} : </h2>
+
+{% for choice in question.choices.all %}
+    <li>{{ choice.choice_text }}</li>
+{% empty %}
+    <li>None</li>
+{% endfor %}
