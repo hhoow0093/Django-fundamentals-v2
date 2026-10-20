@@ -5,10 +5,9 @@
     <li>{{ question.published_date }}</li>
 </ul>
 
-<h2>Available Choices for {{ question.id }} : </h2>
-
-{% for choice in question.choices.all %}
-    <li>{{ choice.choice_text }}</li>
-{% empty %}
-    <li>None</li>
-{% endfor %}
+<form method="POST">
+    {% csrf_token %}
+    {{ form.choices.errors }}
+    {{ form.choices }}
+    <button type="submit">Vote</button>
+</form>
