@@ -12,7 +12,7 @@ class Question(models.Model):
     def was_published_recently(self) -> bool:
         """checks if it was published within 24 hours.
         If more than 24 hours, return False otherwise True."""
-        return self.published_date >= timezone.now() - datetime.timedelta(days=1)
+        return timezone.now() - datetime.timedelta(days=1) <= self.published_date <= timezone.now()
 
     def __str__(self) -> str:
         return self.question_text
