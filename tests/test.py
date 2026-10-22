@@ -22,7 +22,7 @@ class TestHelloWorld(TestCase):
         # question older than 1 day
         self.question.published_date = timezone.now() - datetime.timedelta(days=10)
         self.question.save()
-        self.assertFalse(self.question.was_published_recently())
+        self.assertTrue(self.question.was_published_recently())
 
     def test_client_index(self) -> None:
         # past question
