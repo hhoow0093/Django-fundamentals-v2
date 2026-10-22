@@ -13,3 +13,5 @@ wheels/
 
 # settings
 local_settings.py
+# static
+static_collected
