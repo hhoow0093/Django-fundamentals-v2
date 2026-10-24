@@ -1,6 +1,7 @@
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 
+from mysite.polls.forms import VoteForm
 from mysite.polls.models import Question
 
 
@@ -13,13 +14,17 @@ def index(request: HttpRequest) -> HttpResponse:
 
 def detail(request: HttpRequest, question_id: int) -> HttpResponse:
     question = get_object_or_404(Question, id=question_id)
-    context = {"question": question}
+    form = VoteForm(data=request.POST or None, question=question)
+
+    if form.is_valid():
+        form.save()
+        return redirect("polls:result", question.id)
+
+    context = {"question": question, "form": form}
     return render(request=request, template_name="polls/detail.html", context=context)
 
 
 def results(request: HttpRequest, question_id: int) -> HttpResponse:
-    return HttpResponse(f"You're looking at the results of question {question_id}.")
-
-
-def vote(request: HttpRequest, question_id: int) -> HttpResponse:
-    return HttpResponse(f"You are voting on question {question_id}.")
+    question = get_object_or_404(Question, id=question_id)
+    context = {"question": question}
+    return render(request=request, template_name="polls/result.html", context=context)

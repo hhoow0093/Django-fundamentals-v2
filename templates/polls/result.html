@@ -1,0 +1,18 @@
+<h1>You are viewing question {{ question.id }}</h1>
+
+<ul>
+    <li>{{ question }}</li>
+    <li>{{ question.published_date }}</li>
+</ul>
+
+<h2>Number of votes</h2>
+<ul>
+{% for choice in question.choices.all %}
+    <li>{{ choice.choice_text }} - {{ choice.votes|default:"0" }}</li>
+{% empty %}
+    <li>No votes are available</li>
+{% endfor %}
+</ul>
+
+<h2>Vote again? </h2>
+<a href="{% url "polls:index" %}">Yes</a>
