@@ -1,0 +1,13 @@
+<h1>You are viewing question {{ question.id }}</h1>
+
+<ul>
+    <li>{{ question }}</li>
+    <li>{{ question.published_date }}</li>
+</ul>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.choices.errors }}
+    {{ form.choices }}
+    <button type="submit">Vote</button>
+</form>
