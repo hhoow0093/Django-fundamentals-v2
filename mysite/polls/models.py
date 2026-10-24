@@ -1,5 +1,4 @@
 # Create your models here.
-import datetime
 
 from django.db import models
 from django.utils import timezone
@@ -10,9 +9,8 @@ class Question(models.Model):
     published_date = models.DateTimeField(verbose_name="Date published", auto_now_add=True)
 
     def was_published_recently(self) -> bool:
-        """checks if it was published within 24 hours.
-        If more than 24 hours, return False otherwise True."""
-        return self.published_date >= timezone.now() - datetime.timedelta(days=1)
+        """checks if it was published in the past"""
+        return self.published_date <= timezone.now()
 
     def __str__(self) -> str:
         return self.question_text
