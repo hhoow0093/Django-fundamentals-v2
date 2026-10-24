@@ -1,0 +1,7 @@
+<ul>
+    {% for question in questions %}
+        <li><a href="{% url "polls:detail" question.id %}">{{ question.id }}</a> : {{ question }} : {{ question.published_date }} : {{ question.was_published_recently }} </li>
+    {% empty %}
+        <li>No questions are found</li>
+    {% endfor %}
+</ul>
