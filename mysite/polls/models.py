@@ -1,13 +1,13 @@
-# Create your models here.
-
+from django.contrib import admin
 from django.db import models
 from django.utils import timezone
 
 
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
-    published_date = models.DateTimeField(verbose_name="Date published", auto_now_add=True)
+    published_date = models.DateTimeField(verbose_name="Date published")
 
+    @admin.display(boolean=False, ordering="published_date", description="Published Recently?")
     def was_published_recently(self) -> bool:
         """checks if it was published in the past"""
         return self.published_date <= timezone.now()
